@@ -4,6 +4,7 @@ const { authorize, allowAdmin } = require("../middleware/auth.middleware");
 const router = express.Router();
 
 router.post("/register", User.register);
+router.post('/verifyemail' ,User.verifyEmail);
 router.post("/login", User.login);
 router.get("/registeredUser", authorize, allowAdmin, User.registeredUsers);
 

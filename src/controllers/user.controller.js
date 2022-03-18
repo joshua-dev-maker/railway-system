@@ -3,7 +3,7 @@ const nodemailer = require("nodemailer");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { successResMsg, errorResMsg } = require("../utils/appResponse");
-const { AppError } = require("../utils/appError");
+const AppError = require("../utils/appError");
 require("dotenv").config();
 const { sendMail } = require("../DB/sendMail");
 const { rail_Token } = process.env;
@@ -35,12 +35,19 @@ exports.register = async (req, res, next) => {
       password: hashPassword,
       role,
     });
-
     await newUser.save();
+    const data = {
+      id: newUser._id,
+      email: newUser.email,
+      role: newUser.role,
+    };
+    const url = "theolamideolanrewaju.com";
+    const token = await jwt.sign(data, rail_Token, { expiresIn: "2h" });
     let mailOptions = {
       to: newUser.email,
       subject: "Verify Email",
-      text: `Hi ${firstName},Pls verify your email`,
+      text: `Hi ${firstName}, Pls verify your email. ${url}
+       ${token}`,
     };
     await sendMail(mailOptions);
     return successResMsg(res, 201, {
@@ -52,7 +59,25 @@ exports.register = async (req, res, next) => {
     return errorResMsg(res, 500, { message: error.message });
   }
 };
-
+exports.verifyEmail = async (req, res, next) => {
+  try {
+    const { token } = req.query;
+    const decodedToken = await jwt.verify(token, rail_Token);
+    // console.log(decodedToken);
+    const user = await User.findOne({ email: decodedToken.email }).select(
+      "isVerfied"
+    );
+    console.log(user.isVerfied);
+    if (user.isVerfied) {
+      return res.status(200).json({ message: "user verified already" });
+    }
+    user.isVerfied = true;
+    user.save();
+    return res.status(200).json({ message: "user verified successfully" });
+  } catch (error) {
+    return errorResMsg(res, 500, { message: error.message });
+  }
+};
 exports.login = async (req, res, next) => {
   try {
     const { email, password } = req.body;
@@ -65,6 +90,9 @@ exports.login = async (req, res, next) => {
     const isPasswordExist = await bcrypt.compare(password, emailExist.password);
     if (!isPasswordExist) {
       return next(new AppError("password does not exist", 401));
+    }; 
+    if(!emailExist.isVerfied){
+      return res.status(401).json({message:"User not verified"})
     }
     const data = {
       id: emailExist.id,

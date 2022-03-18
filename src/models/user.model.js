@@ -25,6 +25,10 @@ const UserSchema = new User(
       type: String,
       required: true,
     },
+    isVerfied:{
+      type: Boolean,
+      default: false,
+    },
     role: {
       type: String,
       default: "User",

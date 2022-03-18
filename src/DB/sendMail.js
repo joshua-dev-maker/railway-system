@@ -1,6 +1,6 @@
 const nodemailer = require("nodemailer");
-const user = process.env.user;
-const password = process.env.pass;
+// const user = process.env.user;
+// const password = process.env.pass;
 
 const sendMail = async (config) => {
   try {
@@ -9,15 +9,15 @@ const sendMail = async (config) => {
       port: 465,
       secure: true,
       auth: {
-        user,
-        password,
+        user: "ugochukwuchioma16@gmail.com",
+        pass: "Ikechukwu82",
       },
       tls: {
         rejectUnauthorized: false,
       },
     });
     const info = await transporter.sendMail({
-      from: "mikeisash@gmail.com",
+      from: "ugochukwuchioma16@gmail.com",
       ...config,
     });
     return `Preview URL: %s`, `${nodemailer.getTestMessageUrl(info)}`;
