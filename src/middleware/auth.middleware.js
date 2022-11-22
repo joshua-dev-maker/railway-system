@@ -6,6 +6,7 @@ const { AppError } = require("../utils/appError");
 exports.authorize = async (req, res, next) => {
   try {
     const authorizationArr = req.headers.authorization.split(" ");
+    // const authorizationArr = req.headers.authorization.at(" ")
     if (!authorizationArr.includes("Bearer")) {
       return next(new AppError("Token requires a bearer..", 401));
     }

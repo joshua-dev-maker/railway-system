@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
-
-const bookATrain = mongoose.Schema;
-const bookATrainSchema = new bookATrain(
+const travelTicket = mongoose.Schema;
+const travelTicketSchema = new travelTicket(
   {
     User: {
       type: mongoose.Schema.Types.ObjectId,
@@ -58,5 +57,5 @@ const bookATrainSchema = new bookATrain(
 );
 
 // converting schemas into a model
-const bookATrainModel = mongoose.model("bookATrain", bookATrainSchema);
-module.exports = bookATrainModel;
+const travelTicketModel = mongoose.model("travelTicket", travelTicketSchema);
+module.exports = travelTicketModel;

@@ -15,6 +15,7 @@ const UserSchema = new User(
     phoneNumber: {
       type: Number,
       required: true,
+      unique: true,
     },
     email: {
       type: String,
@@ -25,13 +26,26 @@ const UserSchema = new User(
       type: String,
       required: true,
     },
-    isVerfied:{
+    country: {
+      type: String,
+      required: true,
+    },
+    isVerfied: {
       type: Boolean,
       default: false,
     },
+    idCardNumber: {
+      type: String,
+      required: true,
+      unique: true,
+    },
     role: {
       type: String,
+      enum: ["admin", "User"],
       default: "User",
+    },
+    GoogleId: {
+      type: String,
     },
   },
   { timestamps: true }

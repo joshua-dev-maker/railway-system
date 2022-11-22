@@ -1,14 +1,8 @@
 const mongoose = require("mongoose");
-
-const bookATrain = mongoose.Schema;
-const bookATrainSchema = new bookATrain(
+const trainInfo = mongoose.Schema;
+const trainInfoSchema = new trainInfo(
   {
-    User: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-      required: true,
-    },
-    fullName: {
+    Name: {
       type: String,
       required: true,
     },
@@ -21,7 +15,7 @@ const bookATrainSchema = new bookATrain(
       type: String,
       required: true,
     },
-    passengers: {
+    Capacity: {
       type: Number,
       required: true,
     },
@@ -30,33 +24,25 @@ const bookATrainSchema = new bookATrain(
       enum: ["economy", "business", "firstclass"],
       required: true,
     },
+    price: {
+      type: Number,
+      enum: [2000, 3500, 5000],
+      default: 2000,
+    },
 
-    departureTime: {
+    sessions: {
       type: String,
       enum: ["morning", "afternoon", "evening"],
       required: true,
     },
-    returnTime: {
+    Time: {
       type: String,
-      enum: ["morning", "afternoon", "evening"],
       required: true,
     },
-
-    departureDate: {
-      type: Date,
-      required: true,
-    },
-    returnDate: {
-      type: Date,
-      required: true,
-    },
-    // bookUrl: {
-    //   type: [String],
-    // },
   },
   { timestamps: true }
 );
 
 // converting schemas into a model
-const bookATrainModel = mongoose.model("bookATrain", bookATrainSchema);
-module.exports = bookATrainModel;
+const trainInfoModel = mongoose.model("trainInfo", trainInfoSchema);
+module.exports = trainInfoModel;
