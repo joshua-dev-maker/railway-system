@@ -30,16 +30,17 @@ const bookATrainSchema = new bookATrain(
       enum: ["economy", "business", "firstclass"],
       required: true,
     },
-
-    departureTime: {
-      type: String,
-      enum: ["morning", "afternoon", "evening"],
-      required: true,
-    },
-    returnTime: {
-      type: String,
-      enum: ["morning", "afternoon", "evening"],
-      required: true,
+    time: {
+      departureTime: {
+        type: String,
+        enum: ["morning", "afternoon", "evening"],
+        required: true,
+      },
+      returnTime: {
+        type: String,
+        enum: ["morning", "afternoon", "evening"],
+        required: true,
+      },
     },
 
     departureDate: {

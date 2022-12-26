@@ -28,6 +28,7 @@ const trainInfoSchema = new trainInfo(
       type: Number,
       enum: [2000, 3500, 5000],
       default: 2000,
+      required: true,
     },
 
     sessions: {

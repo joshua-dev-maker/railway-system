@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+const swaggerUi = require("swagger-ui-express");
+const swaggerJSDoc = require("swagger-jsdoc");
 
 const connectDB = async () => {
   try {

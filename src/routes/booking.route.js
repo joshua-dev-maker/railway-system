@@ -12,10 +12,10 @@ const router = express.Router();
 //   // uploader.array("pictures"),
 //   ticket.trainTicket
 // );
-router.patch("/updateTrainTime", ticket.updateTrainTime);
-router.delete("/deleteBooking", ticket.deleteBooking);
+// router.patch("/updateTrainTime", ticket.updateTrainTime);
+// router.delete("/deleteBooking", ticket.deleteBooking);
 router.get("/totalBooking", authorize, allowAdmin, ticket.totalBookings);
-router.post("/payment/init", ticket.payment);
-router.get("/payment/verify", ticket.paymentVerification);
+// router.post("/payment/init", ticket.payment);
+// router.get("/payment/verify", ticket.paymentVerification);
 
 module.exports = router;
