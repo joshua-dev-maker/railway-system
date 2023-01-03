@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const trainInfo = mongoose.Schema;
 const trainInfoSchema = new trainInfo(
   {
-    Name: {
+    trainName: {
       type: String,
       required: true,
     },
@@ -36,7 +36,7 @@ const trainInfoSchema = new trainInfo(
       enum: ["morning", "afternoon", "evening"],
       required: true,
     },
-    Time: {
+    time: {
       type: String,
       required: true,
     },

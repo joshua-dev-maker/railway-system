@@ -76,6 +76,16 @@ const forgotPasswordValidate = joi.object({
 const urlValidate = joi.object({
   email: joi.string().required(),
 });
+const trainValidate = joi.object({
+  Name: joi.string().required(),
+  origin: joi.string().required(),
+  destination: joi.string().required(),
+  capacity: joi.number().required(),
+  reservation: joi.string().required(),
+  price: joi.number().required(),
+  session: joi.string().required(),
+  time: joi.string().required(),
+});
 
 module.exports = {
   validateSignup,
@@ -83,4 +93,5 @@ module.exports = {
   changePasswordValidate,
   forgotPasswordValidate,
   urlValidate,
+  trainValidate,
 };
